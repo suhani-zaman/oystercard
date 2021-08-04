@@ -35,7 +35,7 @@ describe Oystercard do
     it 'checks if the card is not in journey' do 
         subject.top_up(50) 
         subject.touch_in(station) 
-        subject.touch_out
+        subject.touch_out(station)
         expect(subject.in_journey?).to eq false 
     end 
 
@@ -46,7 +46,7 @@ describe Oystercard do
     it 'checks if touch_out deducts money from the balance' do 
         subject.top_up(5)
         subject.touch_in(station)
-        expect{subject.touch_out}.to change{subject.balance}.by -1
+        expect{subject.touch_out(station)}.to change{subject.balance}.by -1
     end 
 
     it 'stores the entry station after touch_in' do 
@@ -54,4 +54,13 @@ describe Oystercard do
         subject.touch_in(station)
         expect(subject.entry_station).to eq station
     end
-end 
+    it "checks if the card has empty list of journey" do
+        expect(subject.card).to be_empty
+    end
+    it "check if a whole journey is created" do
+        subject.top_up(5)
+        subject.touch_in(station)
+        subject.touch_out(station)
+        expect(subject.journey).to include(:station, :station)
+    end
+end
