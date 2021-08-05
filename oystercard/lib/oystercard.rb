@@ -9,12 +9,12 @@ class Oystercard
         @balance = 0
         @in_journey = false 
         @entry_station = nil
-        @journey = {}
+        @journey = {@entry_station => @exit_station}
         @exit_station = nil
         @card = []
 
     end 
-    @journey = {@entry_station => @exit_station}
+    #@journey = {@entry_station => @exit_station}
       
     def top_up(amount) 
         raise 'Maximum limit reached' if (@balance + amount) > MAXIMUM_BALANCE
@@ -32,8 +32,9 @@ class Oystercard
     def touch_out(station)
         deduct(MINIMUM_FARE)
         @in_journey = false
-        @entry_station = nil
+        #@entry_station = nil
         @exit_station = station
+        @journey = {@entry_station => @exit_station}
     end 
 
     def in_journey?
