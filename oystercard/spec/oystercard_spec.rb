@@ -1,4 +1,4 @@
-require 'oystercard'
+require "oystercard"
 
 describe Oystercard do 
     let (:entry_station) {double :entry_station}
@@ -56,12 +56,12 @@ describe Oystercard do
         expect(subject.entry_station).to eq entry_station
     end
     it "checks if the card has empty list of journey" do
-        expect(subject.card).to be_empty
+        expect(subject.journeys).to be_empty
     end
     it "check if a whole journey is created" do
         subject.top_up(5)
         subject.touch_in("london")
-        subject.touch_out("me")
-        expect(subject.journey).to include(:entry_station => "london", :exit_station => "me")
+        subject.touch_out("king cross")
+        expect(subject.journeys).to include(destination: "king cross", entrance: "london")
     end
 end
