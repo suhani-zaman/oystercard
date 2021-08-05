@@ -8,9 +8,9 @@ class Oystercard
     def initialize()
         @balance = 0
         @in_journey = false 
-        @entry_station = ""
+        @entry_station = nil
         @journey = {}
-        @exit_station = ""
+        @exit_station = nil
         @card = []
 
     end 
@@ -37,8 +37,7 @@ class Oystercard
     end 
 
     def in_journey?
-        #!!@entry_station
-        @entry_station != nil
+        !!@entry_station
     end 
     
     
