@@ -7,15 +7,17 @@ class Journey
     MINIMUM_FARE = 1
     PENALTY_FARE = 6
     attr_reader :balance, :entry_station, :journey, :journeys, :exit_station
-
   def initialize(station_name, zone)
-    @balance = 0
-    @in_journey = false 
     @entry_station = station_name
     @exit_station = nil
-    @journeys = []
     @entry_zone = zone
-    #@journey ={}
+    @exit_zone = nil
+  end
+
+  def complete(exit_station, exit_zone, fare)
+    @exit_station = exit_station
+    @exit_zone = exit_zone
+    @fare = fare
   end
 
   # def top_up(amount) 
