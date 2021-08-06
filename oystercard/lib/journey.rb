@@ -8,34 +8,35 @@ class Journey
     PENALTY_FARE = 6
     attr_reader :balance, :entry_station, :journey, :journeys, :exit_station
 
-  def initialize(entry_station = nil)
+  def initialize(station_name, zone)
     @balance = 0
     @in_journey = false 
-    @entry_station = entry_station
+    @entry_station = station_name
     @exit_station = nil
     @journeys = []
+    @entry_zone = zone
     #@journey ={}
   end
 
-  def top_up(amount) 
-    raise 'Maximum limit reached' if (@balance + amount) > MAXIMUM_BALANCE
-    @balance += amount
-  end 
+  # def top_up(amount) 
+  #   raise 'Maximum limit reached' if (@balance + amount) > MAXIMUM_BALANCE
+  #   @balance += amount
+  # end 
 
-  def touch_in(station) 
-    @entry_station = station
-    # raise 'Insufficient funds' if @balance < MINIMUM_BALANCE
-    @in_journey = true 
-  end 
+  # def touch_in(station) 
+  #   @entry_station = station
+  #   raise 'Insufficient funds' if @balance < MINIMUM_BALANCE
+  #   @in_journey = true 
+  # end 
 
-  def touch_out(station)
-    deduct(MINIMUM_FARE)
-    @in_journey = false
-    @exit_station = station
-    @journeys << { entrance: @entry_station, destination: @exit_station}
-    #@journeys << @journey
-  # @entry_station = nil
-  end 
+  # def touch_out(station)
+  #   deduct(MINIMUM_FARE)
+  #   @in_journey = false
+  #   @exit_station = station
+  #   @journeys << { entrance: @entry_station, destination: @exit_station}
+  #   #@journeys << @journey
+  # # @entry_station = nil
+  # end 
 
   def in_journey?
     !!@entry_station
